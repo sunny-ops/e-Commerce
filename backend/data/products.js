@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: "1",
     name: "Airpods Wireless Bluetooth Headphones",
     image: "/images/airpod1.png",
     description: "Bluetooth technology .........",
@@ -12,7 +11,6 @@ const products = [
     numReviews: 4,
   },
   {
-    _id: "2",
     name: "Apple Keyboard",
     image: "/images/keyboard.jpeg",
     description: "Bluetooth technology .........",
