@@ -14,6 +14,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     shippingPrice,
     totalPrice,
   } = req.body;
+  console.log(req);
 
   if (orderItems && orderItems.length === 0) {
     res.status(400);
@@ -23,6 +24,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     const order = new Order({
       orderItems,
       user: req.user._id,
+      //   user: new ObjectId("640d172038b86a59eeb76fbb"),
       shippingAddress,
       paymentMethod,
       itemsPrice,
@@ -30,6 +32,8 @@ const addOrderItems = asyncHandler(async (req, res) => {
       shippingPrice,
       totalPrice,
     });
+    console.log(order.paymentMethod);
+    console.log(paymentMethod);
     const createdOrder = await order.save();
     res.status(201).json(createdOrder);
   }

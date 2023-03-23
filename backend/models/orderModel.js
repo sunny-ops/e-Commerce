@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 // const orderSchema = mongoose.SchemaType(
 const orderSchema = mongoose.Schema(
   {
-    User: {
+    user: {
       // type: Mongoose.Schema.Types.ObjectId,
       type: mongoose.Schema.Types.ObjectId,
       required: true,
@@ -27,11 +27,11 @@ const orderSchema = mongoose.Schema(
       postalCode: { type: String, required: true },
       country: { type: String, required: true },
     },
-    paymenMethod: {
+    paymentMethod: {
       type: String,
       require: true,
     },
-    paymenResult: {
+    paymentResult: {
       id: { type: String },
       status: { type: String },
       update_time: { type: String },

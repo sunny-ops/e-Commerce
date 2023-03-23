@@ -18,7 +18,7 @@ const PlaceOrderScreen = () => {
   cart.itemsPrice = addDecimals(
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   );
-  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100);
+  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 10);
 
   cart.taxPrice = addDecimals((0.1 * cart.itemsPrice).toFixed(2));
   cart.totalPrice = (
@@ -29,12 +29,9 @@ const PlaceOrderScreen = () => {
 
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
-  console.log(order);
 
   useEffect(() => {
-    console.log(order);
     if (success) {
-      console.log("hehe");
       console.log(order._id);
       history(`/order/${order._id}`);
     }
