@@ -14,6 +14,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     shippingPrice,
     totalPrice,
   } = req.body;
+  console.log(req.user);
   if (orderItems && orderItems.length === 0) {
     res.status(400);
     throw new Error("No order items");
@@ -31,19 +32,6 @@ const addOrderItems = asyncHandler(async (req, res) => {
     });
     const createdOrder = await order.save();
     res.status(201).json(createdOrder);
-  }
-});
-
-// @desct Fetch sigle product
-// @route GET /api/products/:id
-// @access Pulic
-const getProductById = asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id);
-  if (product) {
-    res.json(product);
-  } else {
-    res.status(404);
-    throw new Error("Product not found");
   }
 });
 
