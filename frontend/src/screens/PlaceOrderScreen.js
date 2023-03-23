@@ -29,9 +29,13 @@ const PlaceOrderScreen = () => {
 
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
+  console.log(order);
 
   useEffect(() => {
+    console.log(order);
     if (success) {
+      console.log("hehe");
+      console.log(order._id);
       history(`/order/${order._id}`);
     }
     // eslint-disable-next-line
