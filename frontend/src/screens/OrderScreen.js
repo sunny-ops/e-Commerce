@@ -41,16 +41,37 @@ const OrderScreen = () => {
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
+                <strong>Name: </strong> {order.user.name}
+              </p>
+              <p>
+                <strong>Email: </strong>{" "}
+                <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
+              </p>
+              <p>
                 <strong>Address:</strong>
                 {order.shippingAddress.address}, {order.shippingAddress.city},{" "}
                 {order.shippingAddress.postalCode},{" "}
                 {order.shippingAddress.country}
               </p>
+              {order.isDelevered ? (
+                <Message variant="success">
+                  Paid on {order.deleveredAt}{" "}
+                </Message>
+              ) : (
+                <Message variant="danger">Not Delevered</Message>
+              )}
             </ListGroup.Item>
             <ListGroup.Item>
               <h2>Payment Method</h2>
-              <strong>Method: </strong>
-              {order.paymentMethod}
+              <p>
+                <strong>Method: </strong>
+                {order.paymentMethod}
+              </p>
+              {order.isPaid ? (
+                <Message variant="success">Paid on {order.paidAt} </Message>
+              ) : (
+                <Message variant="danger">Not Paid</Message>
+              )}
             </ListGroup.Item>
             <ListGroup.Item>
               <h2>Order Items</h2>
