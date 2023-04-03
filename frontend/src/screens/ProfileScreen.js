@@ -6,6 +6,7 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { useLocation, useNavigate } from "react-router-dom";
+import { listMyOrders } from "../actions/orderActions";
 
 const ProfileScreen = () => {
   const [email, setEmail] = useState("");
@@ -17,11 +18,16 @@ const ProfileScreen = () => {
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
+
+  const orderListMy = useSelector((state) => state.userDetails);
+  const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
+
   const location = useLocation();
   const history = useNavigate();
 
@@ -31,6 +37,7 @@ const ProfileScreen = () => {
     } else {
       if (!user.name) {
         dispatch(getUserDetails("profile"));
+        dispatch(listMyOrders());
       } else {
         setName(user.name);
         setEmail(user.email);
