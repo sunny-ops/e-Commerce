@@ -110,7 +110,7 @@ const getUsers = asyncHandler(async (req, res) => {
 const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user) {
-    console.log(user);
+    // console.log(user);
     await User.deleteOne({ name: user.name });
     // await user.remove();
     res.json({ message: "User removed" });
