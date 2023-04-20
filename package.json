@@ -1,6 +1,10 @@
 {
   "name": "e-commerce",
   "version": "1.0.0",
+  "engines": {
+    "node": "18.x",
+    "npm": "8.x"
+  },
   "description": "MERN shopping cart",
   "main": "server.js",
   "type": "module",
