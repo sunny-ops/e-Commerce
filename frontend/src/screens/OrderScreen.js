@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
+// import { PayPalButton } from "react-paypal-button-v2";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { Link } from "react-router-dom";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
@@ -15,6 +16,7 @@ import {
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
+  ORDER_PAY_SUCCESS,
 } from "../constants/orderContants";
 
 const OrderScreen = () => {
@@ -41,7 +43,7 @@ const OrderScreen = () => {
     const addDecimals = (num) => {
       return (Math.round(num * 100) / 100).toFixed(2);
     };
-    console.log("OrderScreen:", order);
+    // console.log("OrderScreen:", order);
     order.itemsPrice = addDecimals(
       order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
     );
@@ -76,7 +78,7 @@ const OrderScreen = () => {
   }, [dispatch, orderId, successPay, successDeliver, order]);
 
   const successPaymenHandler = (paymentResult) => {
-    console.log(paymentResult);
+    // console.log("PaymentResult", paymentResult);
     dispatch(payOrder(orderId, paymentResult));
   };
 
@@ -85,6 +87,27 @@ const OrderScreen = () => {
   // };
   const deliverHandler = () => {
     dispatch(deliverOrder(order));
+  };
+
+  const createOrder = (data, actions) => {
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            value: order.totalPrice,
+          },
+        },
+      ],
+    });
+  };
+
+  // This function will be called when the user completes the PayPal transaction
+  const onApprove = (data, actions) => {
+    return actions.order.capture().then((details) => {
+      alert("Transaction completed by " + details.payer.name.given_name + "!");
+      successPaymenHandler(details);
+      // dispatch(payOrder(orderId, ORDER_PAY_SUCCESS));
+    });
   };
 
   return loading ? (
@@ -207,9 +230,8 @@ const OrderScreen = () => {
                     // />
                     <PayPalScriptProvider options={{ "client-id": "test" }}>
                       <PayPalButtons
-                        style={{ layout: "horizontal" }}
-                        amount={order.totalPrice}
-                        onSuccess={successPaymenHandler}
+                        createOrder={createOrder}
+                        onApprove={onApprove}
                       />
                     </PayPalScriptProvider>
                   )}
