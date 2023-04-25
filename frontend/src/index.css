@@ -32,7 +32,12 @@ h2 {
 }
 
 .carousel-caption h2 {
-  color: #fff;
+  /* color: #fff; */
+  color: #717171;
+}
+
+.text-color {
+  color: #717171;
 }
 
 .carousel img {
@@ -50,4 +55,14 @@ h2 {
   .carousel-caption h2 {
     font-size: 2.5vw;
   }
+}
+
+.custom_carousel {
+  background-image: url("https://media.istockphoto.com/id/488010990/vector/cupcake-seamless-pattern.jpg?s=612x612&w=0&k=20&c=g6uVs1n3m3H-_-cWO-QnN036tpYBo2mhCzYC-_Zl7wI=");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.custom-navbar {
+  background-color: #f4a3a3;
 }

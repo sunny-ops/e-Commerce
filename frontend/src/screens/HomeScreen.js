@@ -32,7 +32,7 @@ const HomeScreen = () => {
           Go Back
         </Link>
       )}
-      <h1>Latest Products</h1>
+      <h1 className="text-color">Latest Products</h1>
       {loading ? (
         <Loader />
       ) : error ? (
